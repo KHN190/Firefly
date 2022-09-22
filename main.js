@@ -18,7 +18,7 @@ function setup() {
   noStroke();
   frameRate(30);
 
-  observeDistance = windowWidth * 0.1;
+  observeDistance = max(windowWidth, windowHeight) * 0.1;
 
   clock = new Cycle();
   swarm = new Swarm();
