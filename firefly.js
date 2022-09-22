@@ -6,7 +6,8 @@ function Swarm() {
 
 Swarm.prototype.run = function() {
   for (let i = 0; i < this.bugs.length; i++) {
-    this.bugs[i].run(this);
+    this.bugs[i].update(this);
+    this.bugs[i].draw();
   }
   // todo: trail
 }
@@ -76,17 +77,24 @@ Firefly.prototype.setoff = function() {
 }
 
 Firefly.prototype.move = function() {
+  let cursor = createVector(mouseX, mouseY);
+  let cdist = cursor.dist(this.pos);
+
+  if (cdist < this.r) {
+    // avoid cursor
+    this.acc = p5.Vector.sub(this.pos, cursor);
+    this.acc.setMag(0.2);
+    this.vel.add(this.acc).limit(1);
+    this.pos.add(this.vel);
+
+  }
+  // random acceleration
   this.acc.add(random(-1, 1), random(-1, 1)).limit(0.1);
   this.vel.add(this.acc).limit(1);
   this.pos.add(this.vel);
-
+  
   this.pos.x = constrain(this.pos.x, width * margin, width * (1 - margin));
   this.pos.y = constrain(this.pos.y, height * margin, height * (1 - margin));
-}
-
-Firefly.prototype.run = function(swarm) {
-  this.update(swarm);
-  this.draw();
 }
 
 Firefly.prototype.update = function(swarm) {

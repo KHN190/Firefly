@@ -1,11 +1,11 @@
 let swarm;
 let clock;
 
-let nFireflies = 300;
+let nFireflies = 200;
 let nConstraint = 3; // [0, 5]
 let observeDistance = 100;
 
-let flashSpeed = 0.2;   // [0.1, 0.4]
+let flashSpeed = 0.15;   // [0.1, 0.4]
 let flashChance = 0.05; // [0, 1]
 
 let margin = 0.05;
@@ -17,6 +17,8 @@ function setup() {
 
   noStroke();
   frameRate(30);
+
+  observeDistance = displayWidth * 0.1;
 
   clock = new Cycle();
   swarm = new Swarm();
