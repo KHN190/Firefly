@@ -67,7 +67,7 @@ Cycle.prototype.tick = function() {
   // tick all fireflies
   for (let i = 0; i < swarm.bugs.length; i++) {
     let firefly = swarm.bugs[i];
-    if (firefly.wait > 0) firefly.wait -= 1;
+    if (!firefly.flashing && firefly.wait > 0) firefly.wait -= 1;
     firefly.init(swarm);
   }
 }

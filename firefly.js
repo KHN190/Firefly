@@ -18,7 +18,7 @@ function Firefly(x, y) {
   this.pos = createVector(x, y);
   this.recovery = 100; // cycles of recovery
   this.wait = 10; // cycles until next potential flash
-  this.size = 10;
+  this.size = 0;
   this.r = observeDistance; // radius for neighbours
   this.colors = [
     color(140, 198, 64), // forest
@@ -70,7 +70,7 @@ Firefly.prototype.setoff = function() {
   this.wait = this.recovery;
   this.flashing = true;
   this.lastFlashCycle = clock.cycle;
-  this.size = 10 + random(-5, 0);
+  this.size = 10 + random(-6, 0);
   this.color_idx = (this.color_idx + 1) % this.colors.length;
 
   // console.log('flash:', clock.cycle);
@@ -83,7 +83,7 @@ Firefly.prototype.move = function() {
   if (cdist < this.r) {
     // avoid cursor
     this.acc = p5.Vector.sub(this.pos, cursor);
-    this.acc.setMag(0.2);
+    this.acc.setMag(0.2 + 0.2 / this.size);
     this.vel.add(this.acc).limit(1);
     this.pos.add(this.vel);
 
@@ -136,9 +136,9 @@ Firefly.prototype.update = function(swarm) {
     this.intensity = sin(this.timer * flashSpeed);
 
     // animate only once after timer is set
-    if (this.lastFlashCycle < clock.cycle && this.intensity < 0.01) {
+    if (this.lastFlashCycle < clock.cycle && this.intensity < -0.9) {
       this.flashing = false;
-      this.intensity = -0.8;
+      this.intensity = -0.99;
       // console.log('done:', clock.cycle);
     }
 
