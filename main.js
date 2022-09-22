@@ -12,7 +12,7 @@ let margin = 0.05;
 let displayNetwork = true;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   createP("Firefly simulation.");
 
   noStroke();
