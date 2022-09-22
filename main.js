@@ -12,13 +12,13 @@ let margin = 0.05;
 let displayNetwork = true;
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   createP("Firefly simulation.");
 
   noStroke();
   frameRate(30);
 
-  observeDistance = displayWidth * 0.1;
+  observeDistance = windowWidth * 0.1;
 
   clock = new Cycle();
   swarm = new Swarm();
@@ -35,10 +35,14 @@ function setup() {
 }
 
 function draw() {
-  background(51);
+  background(0);
 
   clock.run();
   swarm.run();
+}
+
+function windowResized() {
+  setup();
 }
 
 // Clock for the system
